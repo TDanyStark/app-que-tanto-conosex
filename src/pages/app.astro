@@ -1,0 +1,28 @@
+---
+import Contenedor from "../components/Contenedor.astro"
+import ImgEncabezado from "../components/ImgEncabezado.astro"
+import Layout from "../layouts/Layout.astro"
+import Game from "../sections/Game.astro"
+---
+
+<Layout 
+  title="App - ¿Qué tanto conoSEX?"
+  description="Este aplicativo tiene como objetivo promover, de	manera lúdica, conocimientos clave sobre salud sexual y reproductiva" 
+>
+
+<Contenedor>
+  <ImgEncabezado src="/img_encabezado_1.png" alt="Encabezado de la aplicación ¿Qué tanto conoSEX?" />
+
+
+  <main class="py-8 px-8 md:px-16 bg-gray-100 space-y-2">
+    <img class="w-48" src="/logo_educando.png" alt="">
+    <p class="text-morado">Para interactuar con las targetas pon el mouse encima, o si estas en un dispositivo mobile haz touch en la tarjeta</p>
+    <Game>
+
+    </Game>
+  </main>
+
+
+</Contenedor>
+</Layout>
+
