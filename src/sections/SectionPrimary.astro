@@ -3,7 +3,7 @@ import { URL_BASE } from "../config";
 ---
 
   <div>
-    <img class="w-full" src="./img_principal.webp" alt="Imagen principal">
+    <img class="w-full" src={URL_BASE + "img_principal.webp"} alt="Imagen principal">
   </div>
   <div class="bg-rosado-oscuro text-white text-4xl py-8 px-16">
     <p><span class="text-morado-texto font-semibold">Este aplicativo tiene como objetivo promover, de 
@@ -17,6 +17,6 @@ import { URL_BASE } from "../config";
       <a href={URL_BASE + "app/"} class="btn-morado text-3xl"><span class="font-semibold">HAZ CLIC AQUÍ</span> PARA EMPEZAR</a>
     </article>
     <article>
-      <img src="./logo_educando.png" alt="Logo educando al futuro">
+      <img src={URL_BASE + "logo_educando.png"} alt="Logo educando al futuro">
     </article>
   </div>

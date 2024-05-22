@@ -1,5 +1,6 @@
 ---
 import Header from '../sections/Header.astro';
+import { URL_BASE } from '../config';
 
 
 interface Props {
@@ -16,7 +17,7 @@ const { title, description } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="icon-192x192.png" />
+		<link rel="icon" type="image/svg+xml" href={URL_BASE + "icon-192x192.png"} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<!-- SEO -->
@@ -25,7 +26,7 @@ const { title, description } = Astro.props;
 		<!-- Social -->
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content="img_principal.webp" />
+		<meta property="og:image" content={URL_BASE + "img_principal.webp"} />
 		<meta property="og:url" content={Astro.url} />
 		
 	</head>
