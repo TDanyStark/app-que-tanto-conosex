@@ -1,8 +1,9 @@
 ---
+import { URL_BASE } from '../config.js';
 ---
 
 <header class="w-full bg-personalizado p-8 fixed h-28 flex items-center z-10">
-  <a class="block p-1" href="/"><img class="w-40 h-auto" src="/logos/abbott.png" alt=""></a>
+  <a class="block p-1" href={URL_BASE}><img class="w-40 h-auto" src={URL_BASE + "logos/abbott.png"} alt=""></a>
 </header>
 
 

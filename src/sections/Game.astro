@@ -1,15 +1,137 @@
 ---
-import data from '../../public/data/data.json';
-import Card from '../components/Card.astro';
+import data from "../../public/data/data.json";
+import Card from "../components/Card.astro";
 ---
 
-<section class="flex gap-8 flex-wrap justify-center py-8" >
-    
-    {
-        data.map((item) => {
-            return (
-                <Card numero={item.numero} pregunta={item.pregunta} respuesta={item.respuesta_correcta} />
-            )
-        })
-    }
+<section class="flex gap-8 flex-wrap justify-center py-8">
+  {
+    data.map((item) => {
+      return (
+        <Card
+          numero={item.numero}
+          pregunta={item.pregunta}
+          respuesta={item.respuesta_correcta}
+        />
+      );
+    })
+  }
 </section>
+
+<style is:global>
+  .line-custom {
+    line-height: 0.9em;
+  }
+  .flip-card {
+    background-color: transparent;
+    width: 450px;
+    height: 450px;
+    perspective: 2000px;
+    font-family: sans-serif;
+  }
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 1rem;
+    padding: 25px;
+  }
+
+  .active {
+    transform: rotateY(-180deg);
+  }
+
+  .flip-card:hover .noActive {
+    transform: rotateY(-10deg);
+  }
+
+  .flip-card-back {
+    background: #772583;
+    color: white;
+    transform: rotateY(-180deg);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // obtener la data de public/data.json
+    fetch("../data/data.json")
+      .then((response) => response.json())
+      .then((json) => {
+        data = json;
+      });
+
+    let emogisAlegres = ["😊", "👋🏻", "👌", "🫡"];
+    let emogisTristes = ["🥲", "🙃", "😖", "👎🏻"]
+    const flipCards = document.querySelectorAll(".flip-card");
+    let ultimeFlipCard = null;
+
+    let data = null;
+
+    flipCards.forEach((flipCard) => {
+      flipCard.addEventListener("click", (e) => {
+        let el = e.target as Element;
+
+        if (el.tagName === "BUTTON") {
+          const res = el.getAttribute("data-res");
+          const number = el.parentElement.getAttribute("data-number");
+
+          if (!res || !number || !data) return;
+
+          const pregunta = data.find(
+            (item) => item.numero === parseInt(number)
+          );
+          const popup = document.getElementById('popup');
+          const notice = document.getElementById('notice');
+          const emogi = document.getElementById('emogi_popup');
+
+          if (pregunta.respuesta_correcta === res) {
+            popup.classList.remove("hidden")
+            notice.textContent = "Felicitaciones la respuesta fue correcta"
+            emogi.textContent = emogisAlegres[Math.floor(Math.random() * emogisAlegres.length)]
+          } else {
+            popup.classList.remove("hidden")
+            notice.textContent = "¡OH NO! Intenta de nuevo"
+            emogi.textContent = emogisTristes[Math.floor(Math.random() * emogisTristes.length)]
+          }
+          return;
+        }
+
+        if (flipCard.querySelector(".flip-card-inner").classList.contains("active")) return;
+
+        if (ultimeFlipCard) {
+          ultimeFlipCard.querySelector(".flip-card-inner").classList.remove("active");
+          ultimeFlipCard.querySelector(".flip-card-inner").classList.add("noActive");
+        }
+
+        flipCard.querySelector(".flip-card-inner").classList.remove("noActive");
+        flipCard.querySelector(".flip-card-inner").classList.add("active");
+        ultimeFlipCard = flipCard;
+      });
+    });
+
+    // modal
+    
+
+
+    
+
+  });
+</script>
+
